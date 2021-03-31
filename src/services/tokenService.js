@@ -1,17 +1,28 @@
-const STORAGE_KEYS = {
-	accessToken: 'access_token',
-	expiresIn: 'expires_in'
+export const getAccessToken = () =>
+  JSON.parse(localStorage.getItem("auth_state"))?.access_token;
+
+export const isAccessTokenExpired = () => {
+  return (
+    !localStorage.getItem("auth_state") ||
+    new Date().getTime() >
+      JSON.parse(localStorage.getItem("auth_state"))?.expirationTime
+  );
 };
 
-export const getAccessToken = () => localStorage.getItem(STORAGE_KEYS.accessToken);
+export const setToken = authResponse => {
+  const expirationTime = new Date();
+  expirationTime.setSeconds(
+    expirationTime.getSeconds() + Number(authResponse.expires_in)
+  );
 
-export const setToken = (token) => {
-	Object.values(STORAGE_KEYS)
-		.filter(storageKey => !!token[storageKey])
-		.forEach(storageKey => localStorage.setItem(storageKey, token[storageKey]));
+  const authState = {
+    ...authResponse,
+    expirationTime: expirationTime.getTime()
+  };
+
+  localStorage.setItem("auth_state", JSON.stringify(authState));
 };
 
 export const clearToken = () => {
-	Object.values(STORAGE_KEYS)
-		.forEach(storageKey => localStorage.removeItem(storageKey))
+  localStorage.clear("auth_state");
 };

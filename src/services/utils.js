@@ -1,10 +1,10 @@
 export function getHashParams() {
   const hashEntries = window.parent.location.hash
     .substring(1)
-    .split('&')
+    .split("&")
     .filter(params => !!params)
     .map(param => {
-      const nameToValue = param.split('=');
+      const nameToValue = param.split("=");
       return [nameToValue[0], nameToValue[1]];
     });
 
