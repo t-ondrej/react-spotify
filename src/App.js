@@ -6,6 +6,7 @@ import Playlists from "./components/Playlists/Playlists";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PlaylistDetail from "./components/Playlists/PlaylistDetail/PlaylistDetail";
 import styled from "styled-components";
+import spotifyLogo from "./assets/spotify-logo.svg";
 
 const ContentWrapper = styled.div`
   padding: 0 32px;
@@ -13,13 +14,20 @@ const ContentWrapper = styled.div`
   min-width: 768px;
 `;
 
+const Banner = styled.img`
+  width: 100%;
+  max-width: 131px;
+  height: 40px;
+  margin: 24px;
+`;
+
 function App() {
   return (
     <Router>
       <SideNav
-        mainContent={scrollPosition => (
+        mainContent={(scrollingContainerRef) => (
           <>
-            <Header scrollPosition={scrollPosition} />
+            <Header scrollingContainerRef={scrollingContainerRef} />
             <ContentWrapper>
               <Switch>
                 <Route path="/playlist/:playlistId">
@@ -29,7 +37,12 @@ function App() {
             </ContentWrapper>
           </>
         )}
-        sideContent={<Playlists />}
+        sideContent={
+          <>
+            <Banner src={spotifyLogo} />
+            <Playlists />
+          </>
+        }
       ></SideNav>
     </Router>
   );

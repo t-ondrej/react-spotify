@@ -2,6 +2,7 @@ import styled from "styled-components";
 import UserWidget from "../UserWidget/UserWidget";
 import NavigationButtons from "./NavigationButtons";
 import PropTypes from "prop-types";
+import { useEffect, useState } from 'react';
 
 const StyledHeader = styled.div`
   display: flex;
@@ -17,7 +18,15 @@ const StyledHeader = styled.div`
   min-width: 768px;
 `;
 
-const Header = ({ scrollPosition }) => {
+const Header = ({ scrollingContainerRef }) => {
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    if (scrollingContainerRef) {
+      scrollingContainerRef.current.onscroll = (evt) => setScrollPosition(evt.target.scrollTop)
+    }
+  }, [scrollingContainerRef]);
+
   const isMax = scrollPosition > 260;
   return (
     <StyledHeader

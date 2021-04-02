@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import spotifyLogo from "../../assets/spotify-logo.svg";
-import { useState } from "react";
+import { useRef } from "react";
 
 const StyledSideNav = styled.div`
   display: grid;
@@ -33,13 +32,6 @@ const MainContent = styled.div`
   grid-area: main-view;
 `;
 
-const Banner = styled.img`
-  width: 100%;
-  max-width: 131px;
-  height: 40px;
-  margin: 24px;
-`;
-
 const FadingBackground = styled.div`
   position: absolute;
   top: 0;
@@ -53,18 +45,15 @@ const FadingBackground = styled.div`
 `;
 
 const SideNav = ({ sideContent, mainContent }) => {
-  const [scrollPosition, setScrollPosition] = useState(0);
+  const ref = useRef();
 
   return (
     <StyledSideNav>
-      <SideContent>
-        <Banner src={spotifyLogo} />
-        {sideContent}
-      </SideContent>
+      <SideContent>{sideContent}</SideContent>
 
-      <MainContent onScroll={evt => setScrollPosition(evt.target.scrollTop)}>
+      <MainContent ref={ref}>
         <FadingBackground />
-        {mainContent(scrollPosition)}
+        {mainContent(ref)}
       </MainContent>
     </StyledSideNav>
   );

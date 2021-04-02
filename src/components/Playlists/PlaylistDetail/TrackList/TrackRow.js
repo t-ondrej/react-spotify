@@ -29,21 +29,22 @@ const AlbumImage = styled.img`
   width: 40px;
   height: 40px;
   margin-right: 16px;
+  object-fit: cover;
 `;
 
+const getDateToDisplay = date => {
+  const dateParts = date.toDateString().split(" ");
+  return `${dateParts[1]} ${dateParts[2]}, ${dateParts[3]}`;
+};
+
+const getDurationToDisplay = durationInMs => {
+  const durationInSec = Math.floor(durationInMs / 1000);
+  const minutes = Math.floor(durationInSec / 60);
+  const seconds = durationInSec % 60;
+  return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
+};
+
 const TrackRow = ({ idx, track }) => {
-  const getDateToDisplay = date => {
-    const dateParts = date.toDateString().split(" ");
-    return `${dateParts[1]} ${dateParts[2]}, ${dateParts[3]}`;
-  };
-
-  const getDurationToDisplay = durationInMs => {
-    const durationInSec = Math.floor(durationInMs / 1000);
-    const minutes = Math.floor(durationInSec / 60);
-    const seconds = durationInSec % 60;
-    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-  };
-
   // TODO remove spans
   return (
     <StyledTrackRow>
