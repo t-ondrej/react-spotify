@@ -6,15 +6,17 @@ const Playlists = () => {
   const [playlists, setPlaylists] = useState([]);
 
   useEffect(() => {
-    axios.get("/me/playlists").then(playlists => setPlaylists(playlists.items));
+    axios
+      .get("/me/playlists?limit=50")
+      .then((playlists) => setPlaylists(playlists.items));
   }, []);
 
   return (
     <NavCategory
       title="Playlists"
-      items={playlists.map(playlist => ({
+      items={playlists.map((playlist) => ({
         ...playlist,
-        path: `/playlist/${playlist.id}`
+        path: `/playlist/${playlist.id}`,
       }))}
     />
   );

@@ -48,15 +48,15 @@ const UserMenu = ({ opened }) => {
       onClick: () => {
         clearToken();
         window.location.assign("https://spotify.com/logout");
-      }
-    }
+      },
+    },
   ];
 
   return (
     <>
       {opened ? (
         <StyledUserMenu>
-          {items.map(item => (
+          {items.map((item) => (
             <li key={item.title} onClick={() => item.onClick()}>
               <UserMenuLink>{item.title}</UserMenuLink>
             </li>
@@ -68,7 +68,7 @@ const UserMenu = ({ opened }) => {
 };
 
 UserMenu.propTypes = {
-  opened: PropTypes.bool
+  opened: PropTypes.bool,
 };
 
 export default UserMenu;

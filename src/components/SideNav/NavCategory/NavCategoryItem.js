@@ -18,7 +18,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 
   &:hover {
-    color: white;
+    color: #fff;
   }
 `;
 
@@ -33,7 +33,7 @@ const NavCategoryItem = ({ name, path }) => {
 
 NavCategoryItem.propTypes = {
   name: PropTypes.string,
-  path: PropTypes.string
+  path: PropTypes.string,
 };
 
 export default NavCategoryItem;

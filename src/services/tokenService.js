@@ -9,7 +9,7 @@ export const isAccessTokenExpired = () => {
   );
 };
 
-export const setToken = authResponse => {
+export const setToken = (authResponse) => {
   const expirationTime = new Date();
   expirationTime.setSeconds(
     expirationTime.getSeconds() + Number(authResponse.expires_in)
@@ -17,7 +17,7 @@ export const setToken = authResponse => {
 
   const authState = {
     ...authResponse,
-    expirationTime: expirationTime.getTime()
+    expirationTime: expirationTime.getTime(),
   };
 
   localStorage.setItem("auth_state", JSON.stringify(authState));

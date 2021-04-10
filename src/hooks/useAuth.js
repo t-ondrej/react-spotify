@@ -3,14 +3,20 @@ import { isAccessTokenExpired } from "../services/tokenService";
 const SPOTIFY_CONFIG = {
   clientId: "11bc7dba81f34591a3a740f64072cdf1",
   redirectUri: "http://localhost:3000",
-  scopes: ["user-read-email", "user-read-private"]
+  scopes: [
+    "user-read-email",
+    "user-read-private",
+    "playlist-read-private",
+    "playlist-read-collaborative",
+    "user-read-playback-state",
+    "user-modify-playback-state",
+    "user-read-currently-playing",
+    "user-read-recently-played",
+    "user-top-read",
+    "user-read-playback-position",
+    "streaming",
+  ],
 };
-
-function useAuth() {
-  const isAuthenticated = !isAccessTokenExpired();
-
-  return [isAuthenticated, login];
-}
 
 export function login() {
   window.location.href =
@@ -21,4 +27,8 @@ export function login() {
     "&show_dialog=true";
 }
 
-export default useAuth;
+export default function useAuth() {
+  const isAuthenticated = !isAccessTokenExpired();
+
+  return [isAuthenticated, login];
+}

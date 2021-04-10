@@ -6,7 +6,9 @@ import Playlists from "./components/Playlists/Playlists";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PlaylistDetail from "./components/Playlists/PlaylistDetail/PlaylistDetail";
 import styled from "styled-components";
+import TrackBar from "./components/TrackBar/TrackBar";
 import spotifyLogo from "./assets/spotify-logo.svg";
+import SpotifyPlayerProvider from "./components/Spotify/SpotifyPlayerProvider";
 
 const ContentWrapper = styled.div`
   padding: 0 32px;
@@ -23,28 +25,31 @@ const Banner = styled.img`
 
 function App() {
   return (
-    <Router>
-      <SideNav
-        mainContent={(scrollingContainerRef) => (
-          <>
-            <Header scrollingContainerRef={scrollingContainerRef} />
-            <ContentWrapper>
-              <Switch>
-                <Route path="/playlist/:playlistId">
-                  <PlaylistDetail />
-                </Route>
-              </Switch>
-            </ContentWrapper>
-          </>
-        )}
-        sideContent={
-          <>
-            <Banner src={spotifyLogo} />
-            <Playlists />
-          </>
-        }
-      ></SideNav>
-    </Router>
+    <SpotifyPlayerProvider>
+      <Router>
+        <SideNav
+          mainContent={(scrollingContainerRef) => (
+            <>
+              <Header scrollingContainerRef={scrollingContainerRef} />
+              <ContentWrapper>
+                <Switch>
+                  <Route path="/playlist/:playlistId">
+                    <PlaylistDetail />
+                  </Route>
+                </Switch>
+              </ContentWrapper>
+            </>
+          )}
+          sideContent={
+            <>
+              <Banner src={spotifyLogo} />
+              <Playlists />
+            </>
+          }
+          footer={<TrackBar />}
+        ></SideNav>
+      </Router>
+    </SpotifyPlayerProvider>
   );
 }
 

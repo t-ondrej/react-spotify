@@ -5,7 +5,7 @@
 
 :root {
   --light-green: #1ed760;
-  --text-gray: #b3b3b3;
+  --gray: #b3b3b3;
 }
 
 html {
@@ -19,7 +19,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
   width: 100vw;
-  color: #b3b3b3;
+  color: var(--gray);
 }
 
 code {
@@ -54,12 +54,18 @@ h3,
 h4,
 h5,
 h6 {
-  color: white;
+  color: #fff;
 }
 
 ol,
 ul {
   list-style: none;
+}
+
+button {
+  background-color: unset;
+  outline: unset;
+  border: unset;
 }
 
 .ellipsis-one-line {
@@ -89,4 +95,8 @@ ul {
 * {
   scrollbar-color: hsla(0, 0%, 100%, 0.5) hsla(0, 0%, 100%, 0.3);
   scrollbar-width: 12px;
+}
+
+.action-icon:hover {
+  fill: #fff;
 }

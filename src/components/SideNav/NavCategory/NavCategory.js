@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const Title = styled.p`
   font-size: 14px;
   text-transform: uppercase;
-  color: white;
+  color: #fff;
   margin-left: 24px;
   margin-bottom: 4px;
 `;
@@ -23,7 +23,7 @@ const NavCategory = ({ title, items }) => {
       <Title>{title}</Title>
 
       <ItemsWrapper>
-        {items.map(item => (
+        {items.map((item) => (
           <NavCategoryItem key={item.id} name={item.name} path={item.path} />
         ))}
       </ItemsWrapper>
@@ -36,9 +36,9 @@ NavCategory.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
-      name: PropTypes.string
+      name: PropTypes.string,
     })
-  )
+  ),
 };
 
 export default NavCategory;

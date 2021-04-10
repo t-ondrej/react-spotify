@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import durationIcon from "../../../../assets/duration.svg";
+import { ReactComponent as DurationIcon } from "../../../../assets/duration.svg";
 
 const Header = styled.div`
   display: grid;
@@ -30,13 +30,13 @@ const TrackListHeader = () => {
 
   return (
     <Header>
-      {items.map(item => (
+      {items.map((item) => (
         <HeaderItem key={item} className="ellipsis-one-line">
           {item}
         </HeaderItem>
       ))}
       <HeaderItem className="ellipsis-one-line">
-        <img alt="Duration" src={durationIcon} />
+        <DurationIcon />
       </HeaderItem>
     </Header>
   );

@@ -44,7 +44,7 @@ const FadingBackground = styled.div`
   transition: background 1s ease;
 `;
 
-const SideNav = ({ sideContent, mainContent }) => {
+const SideNav = ({ sideContent, mainContent, footer }) => {
   const ref = useRef();
 
   return (
@@ -55,6 +55,8 @@ const SideNav = ({ sideContent, mainContent }) => {
         <FadingBackground />
         {mainContent(ref)}
       </MainContent>
+
+      {footer}
     </StyledSideNav>
   );
 };

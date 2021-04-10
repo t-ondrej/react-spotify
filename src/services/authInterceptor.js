@@ -5,7 +5,7 @@ import { login } from "../hooks/useAuth";
 axios.defaults.baseURL = "https://api.spotify.com/v1";
 
 axios.interceptors.request.use(
-  req => {
+  (req) => {
     const accessToken = getAccessToken();
 
     if (accessToken) {
@@ -14,20 +14,20 @@ axios.interceptors.request.use(
 
     return req;
   },
-  error => {
+  (error) => {
     Promise.reject(error);
   }
 );
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     if (response.status === 401) {
       login();
     }
 
     return response.data;
   },
-  error => {
+  (error) => {
     Promise.reject(error);
   }
 );

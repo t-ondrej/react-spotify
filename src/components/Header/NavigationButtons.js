@@ -1,6 +1,6 @@
-import leftArrow from "../../assets/arrow-left.svg";
-import rightArrow from "../../assets/arrow-right.svg";
-import styled from "styled-components";
+import { ReactComponent as LeftArrowIcon } from "../../assets/arrow-left.svg";
+import { ReactComponent as RightArrowIcon } from "../../assets/arrow-right.svg";
+import styled, { css } from "styled-components";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -26,11 +26,16 @@ const NavigationButton = styled.button`
   }
 `;
 
-const NavigationButtonIcon = styled.img`
+
+
+const NavigationButtonIcon = css`
   height: 20px;
   width: 20px;
   cursor: pointer;
 `;
+
+const StyledLeftArrowIcon = styled(LeftArrowIcon)`${NavigationButtonIcon}`;
+const StyledRightArrowIcon = styled(RightArrowIcon)`${NavigationButtonIcon}`;
 
 const NavigationButtons = () => {
   const [forwardStack, setForwardStack] = useState(0);
@@ -48,21 +53,21 @@ const NavigationButtons = () => {
 
   const onBack = () => {
     history.goBack();
-    setForwardStack(state => ++state);
+    setForwardStack((state) => ++state);
   };
 
   const onForward = () => {
     history.goForward();
-    setForwardStack(state => --state);
+    setForwardStack((state) => --state);
   };
 
   return (
     <div>
       <NavigationButton style={{ float: "left" }} onClick={onBack}>
-        <NavigationButtonIcon src={leftArrow} />
+        <StyledLeftArrowIcon />
       </NavigationButton>
       <NavigationButton disabled={forwardStack < 1} onClick={onForward}>
-        <NavigationButtonIcon src={rightArrow} />
+        <StyledRightArrowIcon />
       </NavigationButton>
     </div>
   );

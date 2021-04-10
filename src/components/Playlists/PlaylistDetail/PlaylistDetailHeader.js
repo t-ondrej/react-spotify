@@ -17,7 +17,8 @@ const PlaylistName = styled.h1`
       padding: 8px 0px;
       font-size: ${fontSize}px;
       line-height: ${fontSize}px;
-      color: white;
+      color: #fff;
+      letter-spacing: -.04em;
 
       @media screen and (max-width: 1400px) {
         font-size: 48px;
@@ -40,7 +41,7 @@ const PlaylistImage = styled.img`
 
 const PlaylistDescription = styled.p`
   margin-top: 8px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: normal;
@@ -56,14 +57,15 @@ const PlaylistInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  overflow: hidden;
 `;
 
-const getTotalTime = playlist =>
+const getTotalTime = (playlist) =>
   playlist.tracks.items
     .map(({ track }) => track.duration_ms)
     .reduce((acc, curr) => acc + curr, 0);
 
-const getTotalTimeToDisplay = playlist => {
+const getTotalTimeToDisplay = (playlist) => {
   const totalTimeInSeconds = getTotalTime(playlist) / 1000;
   const hours = Math.floor(totalTimeInSeconds / (60 * 60));
   if (hours > 0) {
@@ -83,8 +85,10 @@ const PlaylistDetailheader = ({ playlist }) => {
 
       <PlaylistInfoWrapper>
         <PlaylistMetaName>PLAYLIST</PlaylistMetaName>
-        <PlaylistName name={playlist.name}>{playlist.name}</PlaylistName>
-        <PlaylistDescription>{playlist.description}</PlaylistDescription>
+        <PlaylistName className="ellipsis-one-line" name={playlist.name}>
+          {playlist.name}
+        </PlaylistName>
+        <PlaylistDescription dangerouslySetInnerHTML={{ __html: playlist.description }}></PlaylistDescription>
         <PlaylistCaption>{`${playlist.owner.display_name} • ${
           playlist.tracks.total
         } songs, ${getTotalTimeToDisplay(playlist)}`}</PlaylistCaption>

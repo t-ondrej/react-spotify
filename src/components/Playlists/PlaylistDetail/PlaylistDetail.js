@@ -12,20 +12,18 @@ const PlaylistDetail = () => {
     () =>
       axios
         .get(`/playlists/${match.params.playlistId}`)
-        .then(playlists => setPlaylist(playlists)),
+        .then((playlists) => setPlaylist(playlists)),
     [match.params.playlistId]
   );
 
   return (
     <>
-      {playlist?.tracks ? (
+      {playlist?.tracks && (
         <>
           <PlaylistDetailHeader playlist={playlist} />
-          <TrackList
-            tracks={playlist.tracks.items.filter(({ track }) => !!track)}
-          />
+          <TrackList playlist={playlist}/>
         </>
-      ) : null}
+      )}
     </>
   );
 };

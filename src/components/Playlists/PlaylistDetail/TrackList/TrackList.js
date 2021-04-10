@@ -2,24 +2,34 @@ import TrackRow from "./TrackRow";
 import TrackListHeader from "./TrackListHeader";
 import PropTypes from "prop-types";
 
-const TrackList = ({ tracks }) => {
+const TrackList = ({ playlist }) => {
   return (
     <>
       <TrackListHeader />
 
-      {tracks.map((track, idx) => (
-        <TrackRow key={track.track.id} track={track} idx={idx} />
+      {playlist.tracks.items.map((track, idx) => (
+        <TrackRow
+          key={track.track.id}
+          track={track}
+          idx={idx}
+          contextUri={playlist.uri}
+        />
       ))}
     </>
   );
 };
 
 TrackList.propTypes = {
-  tracks: PropTypes.arrayOf(
-    PropTypes.shape({
-      track: PropTypes.shape({})
-    })
-  )
+  playlist: PropTypes.shape({
+    uri: PropTypes.string,
+    tracks: PropTypes.shape({
+      items: PropTypes.arrayOf(
+        PropTypes.shape({
+          track: PropTypes.shape({}),
+        })
+      ),
+    }),
+  }),
 };
 
 export default TrackList;

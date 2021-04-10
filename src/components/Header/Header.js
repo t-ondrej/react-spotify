@@ -2,7 +2,7 @@ import styled from "styled-components";
 import UserWidget from "../UserWidget/UserWidget";
 import NavigationButtons from "./NavigationButtons";
 import PropTypes from "prop-types";
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const StyledHeader = styled.div`
   display: flex;
@@ -22,15 +22,19 @@ const Header = ({ scrollingContainerRef }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
-    if (scrollingContainerRef) {
-      scrollingContainerRef.current.onscroll = (evt) => setScrollPosition(evt.target.scrollTop)
+    if (!scrollingContainerRef) {
+      return;
     }
+
+    scrollingContainerRef.current.onscroll = (evt) => {
+      setScrollPosition(evt.target.scrollTop);
+    };
   }, [scrollingContainerRef]);
 
   const isMax = scrollPosition > 260;
   return (
     <StyledHeader
-      style={{ "background-color": `rgba(30, 30, 30, ${isMax ? 1 : 0})` }}
+      style={{ backgroundColor: `rgba(30, 30, 30, ${isMax ? 1 : 0})` }}
     >
       <NavigationButtons />
       <UserWidget />
@@ -39,7 +43,7 @@ const Header = ({ scrollingContainerRef }) => {
 };
 
 Header.propTypes = {
-  scrollPosition: PropTypes.number
+  scrollPosition: PropTypes.number,
 };
 
 export default Header;
