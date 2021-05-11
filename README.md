@@ -1,3 +1,7 @@
+### You need to have a premium spotify account. Playback won't work otherwise.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
